@@ -13,8 +13,11 @@ class dovecot::config::augeas {
       group  => root,
       mode   => '0644'
     }
-    file { '/usr/share/augeas/lenses/dist/dovecot.aug':
-      source => 'puppet:///modules/dovecot/dovecot.aug',
+
+    if (versioncmp($::augeasversion, '1.12.0') < 0) {
+      file { '/usr/share/augeas/lenses/dist/dovecot.aug':
+        source => 'puppet:///modules/dovecot/dovecot.aug',
+      }
     }
 
     file { '/usr/share/augeas/lenses/dist/build.aug':
@@ -24,6 +27,5 @@ class dovecot::config::augeas {
     file { '/usr/share/augeas/lenses/dist/util.aug':
       source => 'puppet:///modules/dovecot/util.aug',
     }
-
   }
 }
