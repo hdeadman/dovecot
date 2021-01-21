@@ -6,7 +6,7 @@
 # ships those packages.
 #
 class dovecot::config::augeas {
-  if (versioncmp($::augeasversion, '1.0.0') < 0) {
+  if (versioncmp($::augeasversion, '1.12.0') < 0) {
     File {
       ensure => file,
       owner  => root,
@@ -14,18 +14,18 @@ class dovecot::config::augeas {
       mode   => '0644'
     }
 
-    if (versioncmp($::augeasversion, '1.12.0') < 0) {
-      file { '/usr/share/augeas/lenses/dist/dovecot.aug':
-        source => 'puppet:///modules/dovecot/dovecot.aug',
+    file { '/usr/share/augeas/lenses/dist/dovecot.aug':
+      source => 'puppet:///modules/dovecot/dovecot.aug',
+    }
+
+    if (versioncmp($::augeasversion, '1.0.0') < 0) {
+      file { '/usr/share/augeas/lenses/dist/build.aug':
+        source => 'puppet:///modules/dovecot/build.aug',
       }
-    }
 
-    file { '/usr/share/augeas/lenses/dist/build.aug':
-      source => 'puppet:///modules/dovecot/build.aug',
-    }
-
-    file { '/usr/share/augeas/lenses/dist/util.aug':
-      source => 'puppet:///modules/dovecot/util.aug',
+      file { '/usr/share/augeas/lenses/dist/util.aug':
+        source => 'puppet:///modules/dovecot/util.aug',
+      }
     }
   }
 }
