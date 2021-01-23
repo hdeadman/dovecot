@@ -46,6 +46,7 @@ class dovecot::ldap (
     mode    => '0600',
     owner   => root,
     group   => dovecot,
+    require => Package[$::dovecot::mailpackages],
     before  => Exec['dovecot'],
   }
 
@@ -55,6 +56,7 @@ class dovecot::ldap (
     mode    => '0600',
     owner   => root,
     group   => dovecot,
+    require => Package[$::dovecot::mailpackages],
     before  => Exec['dovecot'],
   }
 
@@ -64,6 +66,7 @@ class dovecot::ldap (
     mode    => '0600',
     owner   => root,
     group   => dovecot,
+    require => Package[$::dovecot::mailpackages],
     before  => Exec['dovecot'],
   }
 
